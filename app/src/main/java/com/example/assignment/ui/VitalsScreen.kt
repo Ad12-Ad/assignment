@@ -103,7 +103,86 @@ fun VitalsScreen(
     }
 }
 
+@Composable
+fun VitalsItem(
+    vitalsEntry: VitalsEntry
+) {
+    ElevatedCard(
+        modifier = Modifier
+            .padding(horizontal = 16.dp)
+            .fillMaxWidth(),
+        elevation = CardDefaults.cardElevation(4.dp)
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+        ) {
+            Row(
+                modifier = Modifier.fillMaxWidth().padding(8.dp),
+                horizontalArrangement = Arrangement.Absolute.SpaceAround,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Column (
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center,
+                    modifier = Modifier.fillMaxWidth(0.5f)
+                ){
+                    VitalRow(R.drawable.heart_rate, "${vitalsEntry.heartRate} bpm")
+                    VitalRow(R.drawable.blood_pressure, "${vitalsEntry.systolicPressure}/${vitalsEntry.diastolicPressure} mmHg")
+                }
+                Column (
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center,
+                    modifier = Modifier.fillMaxWidth(0.5f)
+                ){
+                    VitalRow(R.drawable.scale, "${vitalsEntry.weight} kg")
+                    VitalRow(R.drawable.newborn, "${vitalsEntry.babyKicksCount}")
+                }
+            }
+            Box(
+                contentAlignment = Alignment.CenterEnd,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(MaterialTheme.colorScheme.primaryContainer)
+                    .padding(10.dp)
+            ){
+                Text(
+                    text = formatDate(vitalsEntry.timestamp),
+                    style = TextStyle(
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.Thin,
+                        color = MaterialTheme.colorScheme.onPrimaryContainer
+                    )
+                )
+            }
+        }
+    }
+}
 
+@Composable
+fun VitalRow(@DrawableRes icon: Int, value: String) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceEvenly,
+        modifier = Modifier.padding(vertical = 2.dp)
+    ) {
+        Image(
+            painter = painterResource(id = icon),
+            contentDescription = null,
+            modifier = Modifier.size(30.dp)
+        )
+        Spacer(modifier = Modifier.width(10.dp))
+        Text(
+            text = value,
+            style = TextStyle(
+                fontSize = 16.sp,
+                fontWeight = FontWeight.SemiBold,
+                color = MaterialTheme.colorScheme.primary
+            ),
+            modifier = Modifier.weight(0.6f)
+        )
+    }
+}
 
 private fun formatDate(timestamp: Long): String {
     val dateFormat = SimpleDateFormat("MMM dd, yyyy • HH:mm", Locale.getDefault())

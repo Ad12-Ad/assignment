@@ -19,8 +19,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import com.example.assignment.ui.viewmodel.VitalsEvent
-import com.example.assignment.ui.viewmodel.VitalsState
+import com.example.assignment.ui.screens.viewmodel.VitalsEvent
+import com.example.assignment.ui.screens.viewmodel.VitalsState
 
 @Composable
 fun AddVitalsDialog(

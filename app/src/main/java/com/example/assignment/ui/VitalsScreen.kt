@@ -99,6 +99,11 @@ fun VitalsScreen(
                     )
                 }
             }
+            items(state.vitalsEntries) { vitalsEntry ->
+                VitalsItem(
+                    vitalsEntry = vitalsEntry
+                )
+            }
         }
     }
 }

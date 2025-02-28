@@ -9,13 +9,12 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.room.Room
-import com.example.assignment.data.database.AppDatabase
+import com.example.assignment.di.AppModule
 import com.example.assignment.ui.screens.VitalsScreen
+import com.example.assignment.ui.screens.viewmodel.VitalsEvent
 import com.example.assignment.ui.screens.viewmodel.VitalsViewModel
 import com.example.assignment.ui.theme.AssignmentTheme
+import com.example.assignment.worker.VitalsReminderScheduler
 
 class MainActivity : ComponentActivity() {
     private lateinit var viewModel: VitalsViewModel
@@ -24,19 +23,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        // Initialize database
-        val db = Room.databaseBuilder(
-            applicationContext,
-            AppDatabase::class.java,
-            "pregnancy_vitals_database"
-        ).build()
+        VitalsReminderScheduler.scheduleReminder(this)
 
-        // Create ViewModel
-        viewModel = ViewModelProvider(this, object : ViewModelProvider.Factory {
-            override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return VitalsViewModel(db.dao) as T
-            }
-        })[VitalsViewModel::class.java]
+        viewModel = AppModule.provideVitalsViewModel(this)
 
         setContent {
             AssignmentTheme {
@@ -44,6 +33,12 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.systemBarsPadding()
                 ){
                     val state by viewModel.state.collectAsState()
+
+                    if (intent?.getBooleanExtra("SHOW_ADD_VITALS_DIALOG", false) == true) {
+                        viewModel.onEvent(VitalsEvent.ShowDialog)
+                        intent.removeExtra("SHOW_ADD_VITALS_DIALOG")
+                    }
+
                     VitalsScreen(
                         state = state,
                         onEvent = viewModel::onEvent

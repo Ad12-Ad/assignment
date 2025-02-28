@@ -2,8 +2,8 @@ package com.example.assignment.ui.screens.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.assignment.data.database.VitalsDao
 import com.example.assignment.data.model.VitalsEntry
+import com.example.assignment.data.repository.VitalsRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
@@ -12,13 +12,14 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class VitalsViewModel(
-    private val dao: VitalsDao
+    private val repository: VitalsRepository
 ): ViewModel() {
 
-    private val _vitalsEntries = dao.getVitalsOrderedByTimestamp()
+    private val _vitalsEntries = repository.getVitalsOrderedByTimestamp()
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), emptyList())
 
     private val _state = MutableStateFlow(VitalsState())
+
     val state = combine(_state, _vitalsEntries) { state, vitals ->
         state.copy(
             vitalsEntries = vitals
@@ -48,7 +49,7 @@ class VitalsViewModel(
                 )
 
                 viewModelScope.launch {
-                    dao.upsertVitals(vitalsEntry)
+                    repository.upsertVitals(vitalsEntry)
                 }
 
                 _state.update { it.copy(

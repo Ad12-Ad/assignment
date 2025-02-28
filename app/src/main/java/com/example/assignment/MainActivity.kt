@@ -9,6 +9,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.core.view.WindowCompat
 import com.example.assignment.di.AppModule
 import com.example.assignment.ui.screens.VitalsScreen
 import com.example.assignment.ui.screens.viewmodel.VitalsEvent

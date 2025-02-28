@@ -39,24 +39,25 @@ fun VitalsItem(
                 .fillMaxWidth()
         ) {
             Row(
-                modifier = Modifier.fillMaxWidth().padding(8.dp),
-                horizontalArrangement = Arrangement.Absolute.SpaceAround,
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp),
+                horizontalArrangement = Arrangement.SpaceAround,
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Column (
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center,
-                    modifier = Modifier.fillMaxWidth(0.5f)
+                    modifier = Modifier.weight(1f)
                 ){
                     VitalRow(R.drawable.heart_rate, "${vitalsEntry.heartRate} bpm")
-                    VitalRow(R.drawable.blood_pressure, "${vitalsEntry.systolicPressure}/${vitalsEntry.diastolicPressure} mmHg")
+                    VitalRow(R.drawable.scale, "${vitalsEntry.weight} kg")
+
                 }
                 Column (
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center,
-                    modifier = Modifier.fillMaxWidth(0.5f)
+                    modifier = Modifier.weight(1f)
                 ){
-                    VitalRow(R.drawable.scale, "${vitalsEntry.weight} kg")
+                    VitalRow(R.drawable.blood_pressure, "${vitalsEntry.systolicPressure}/${vitalsEntry.diastolicPressure} mmHg")
                     VitalRow(R.drawable.newborn, "${vitalsEntry.babyKicksCount}")
                 }
             }

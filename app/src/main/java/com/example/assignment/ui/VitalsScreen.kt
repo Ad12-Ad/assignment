@@ -102,3 +102,10 @@ fun VitalsScreen(
         }
     }
 }
+
+
+
+private fun formatDate(timestamp: Long): String {
+    val dateFormat = SimpleDateFormat("MMM dd, yyyy • HH:mm", Locale.getDefault())
+    return dateFormat.format(Date(timestamp))
+}

@@ -1,4 +1,4 @@
-package com.example.assignment.ui.viewmodel
+package com.example.assignment.ui.screens.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

@@ -1,4 +1,4 @@
-package com.example.assignment.ui
+package com.example.assignment.ui.screens
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -35,8 +34,8 @@ import androidx.compose.ui.unit.sp
 import com.example.assignment.R
 import com.example.assignment.data.model.VitalsEntry
 import com.example.assignment.ui.components.AddVitalsDialog
-import com.example.assignment.ui.viewmodel.VitalsEvent
-import com.example.assignment.ui.viewmodel.VitalsState
+import com.example.assignment.ui.screens.viewmodel.VitalsEvent
+import com.example.assignment.ui.screens.viewmodel.VitalsState
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale

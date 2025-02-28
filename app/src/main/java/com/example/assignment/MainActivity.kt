@@ -13,8 +13,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
 import com.example.assignment.data.database.AppDatabase
-import com.example.assignment.ui.VitalsScreen
-import com.example.assignment.ui.viewmodel.VitalsViewModel
+import com.example.assignment.ui.screens.VitalsScreen
+import com.example.assignment.ui.screens.viewmodel.VitalsViewModel
 import com.example.assignment.ui.theme.AssignmentTheme
 
 class MainActivity : ComponentActivity() {

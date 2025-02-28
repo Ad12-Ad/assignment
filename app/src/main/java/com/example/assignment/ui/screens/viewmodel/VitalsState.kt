@@ -1,4 +1,4 @@
-package com.example.assignment.ui.viewmodel
+package com.example.assignment.ui.screens.viewmodel
 
 import com.example.assignment.data.model.VitalsEntry
 
